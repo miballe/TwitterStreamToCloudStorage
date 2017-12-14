@@ -1,14 +1,15 @@
 {
   "name": "twitterstreamtocloudstorage",
   "version": "1.0.0",
-  "description": "Twitter Stream capture saved to a local JSON and then to a Cloud Storage",
+  "description": "Twitter Stream capture tool that saves the collected tweets to a local JSON and then to a cloud storage",
   "main": "GetTweetStream.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/miballe/TweeterStreamToCloudStorage.git"
+    "url": "git+https://github.com/miballe/TwitterStreamToCloudStorage.git"
   },
   "keywords": [
     "twitter",
@@ -21,7 +22,11 @@
   "author": "Miguel Ballesteros",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/miballe/TweeterStreamToCloudStorage/issues"
+    "url": "https://github.com/miballe/TwitterStreamToCloudStorage/issues"
   },
-  "homepage": "https://github.com/miballe/TweeterStreamToCloudStorage#readme"
+  "homepage": "https://github.com/miballe/TwitterStreamToCloudStorage#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "twit": "^2.2.9"
+  }
 }

@@ -6,27 +6,29 @@
 */
 
 /* -- Used Packages -- */
+var config = require('./config');
 var Twit = require('twit')
 var fs = require('fs');
 
 /* -- Constants -- */
-const twConsumerKey = '<< Consumer Key >>';
-const twConsmerSecret = '<< Consumer Secret >>';
-const twAccessToken = '<< Access Token >>';
-const twAccessTokenSecret = '<< Access Token Secret >>';
-const twTermsArray = ['#HashTag1', '#HashTag2', '@user1', '@user2', 'term1', 'term2'];
-const oFolder = '/folder/sub1/sub2/';
-const maxFileSizeMB = 64;
+var twTermsArray = config.capture.twTermsArray;
+var oFolder = config.capture.outputFolder;
+var maxFileSizeMB = config.capture.maxCaptureSizeMB;
 
 /* -- Global Variables -- */
 var newFile = true;
-var oFileName = 'abc.json';
+var oFileName = '';
 var oFullPath = oFolder + oFileName;
+
 /*-- Initialize the first output file -- */
 assignNewFileName();
 
-
-var twConn = new Twit({ consumer_key: twConsumerKey, consumer_secret: twConsmerSecret, access_token: twAccessToken, access_token_secret: twAccessTokenSecret });
+var twConn = new Twit({
+    consumer_key: config.twitter.consumerKey, 
+    consumer_secret: config.twitter.consumerSecret, 
+    access_token: config.twitter.accessToken, 
+    access_token_secret: config.twitter.accessTokenSecret 
+});
 var stream = twConn.stream('statuses/filter', { track: twTermsArray });
 console.log("[INFO] Now receiving Tweets...");
 
@@ -62,7 +64,7 @@ function EndFile() {
 /* -- Checks the file for max size and start a new one if necessary -- */
 function CheckFileSize() {
     let stats = fs.statSync(oFullPath);
-    if(stats.size / 1024000 > maxFileSizeMB) {
+    if(((stats.size - 10000) / 1024000) > 0.064) {
         EndFile();
         newFile = true;
         assignNewFileName();
