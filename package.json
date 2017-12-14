@@ -1,0 +1,27 @@
+{
+  "name": "twitterstreamtocloudstorage",
+  "version": "1.0.0",
+  "description": "Twitter Stream capture saved to a local JSON and then to a Cloud Storage",
+  "main": "GetTweetStream.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miballe/TweeterStreamToCloudStorage.git"
+  },
+  "keywords": [
+    "twitter",
+    "stream",
+    "azure",
+    "gcp",
+    "aws",
+    "json"
+  ],
+  "author": "Miguel Ballesteros",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miballe/TweeterStreamToCloudStorage/issues"
+  },
+  "homepage": "https://github.com/miballe/TweeterStreamToCloudStorage#readme"
+}
