@@ -64,7 +64,7 @@ function EndFile() {
 /* -- Checks the file for max size and start a new one if necessary -- */
 function CheckFileSize() {
     let stats = fs.statSync(oFullPath);
-    if(((stats.size - 10000) / 1024000) > 0.064) {
+    if((stats.size / 1024000) > maxFileSizeMB) {
         EndFile();
         newFile = true;
         assignNewFileName();

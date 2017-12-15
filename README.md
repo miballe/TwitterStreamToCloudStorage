@@ -24,7 +24,7 @@ Then, change to the newly created directory (most likely `TwitterStreamToCloudSt
 
 ```zsh
 $ cd TwitterStreamToCloudStorage
-$ mpm install
+$ npm install
 ```
 
 After this command you'll see a node_modules folder with the downloaded libraries.
@@ -59,7 +59,7 @@ $ npm start
 
 Running in background...
 ```zsh
-$ npm start > twactivity.log
+$ npm start > twactivity.log &
 ```
 
 # Current work

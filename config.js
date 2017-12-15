@@ -9,7 +9,7 @@ config.azure = {};
 /* -- Capture Settings -- */
 config.capture.maxCaptureSizeMB = 16;    // 0.064 = 64KB, 1 = 1MB...
 config.capture.outputFolder = '/mnt/c/temp/twcap/';
-config.capture.twTermsArray = ['#21D'];
+config.capture.twTermsArray = ['#AI', '#ML', '#nodejs', '#node', '@twitter'];
 
 /* -- Twitter App Info (https://apps.twitter.com), taken from the .env file -- */
 config.twitter.consumerKey = process.env.TW_CONSUMER_KEY || 'NoValue';
