@@ -23,7 +23,6 @@ var lFileName = '';
 var oFullPath = oFolder + oFileName;
 var useAzure = process.env.AZURE_STORAGE_CONNECTION_STRING === '' ? false : true;
 
-
 /*-- Initialize the first output file -- */
 assignNewFileName();
 
@@ -43,7 +42,6 @@ stream.on('tweet', function (tweet) {
         azureUploadBlob();
     }
     SaveTweet(tweet);
-    console.log('.');
 });
 
 /* -- Handler if the process is finished with Ctrl+C -- */
