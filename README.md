@@ -67,5 +67,6 @@ I'm aware that the app still don't have the expected support to write to all typ
 1. Support of AWS and GCP repositories
 2. Logger
 3. Tweets pre-processing
+4. Compress the ended file and move it to an archive folder
 
 

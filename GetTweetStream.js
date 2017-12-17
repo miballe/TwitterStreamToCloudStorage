@@ -7,7 +7,8 @@
 
 /* -- Used Packages -- */
 var config = require('./config');
-var Twit = require('twit')
+var Twit = require('twit');
+var azure = require('azure-storage');
 var fs = require('fs');
 
 /* -- Constants -- */
@@ -18,7 +19,10 @@ var maxFileSizeMB = config.capture.maxCaptureSizeMB;
 /* -- Global Variables -- */
 var newFile = true;
 var oFileName = '';
+var lFileName = '';
 var oFullPath = oFolder + oFileName;
+var useAzure = process.env.AZURE_STORAGE_CONNECTION_STRING === '' ? false : true;
+
 
 /*-- Initialize the first output file -- */
 assignNewFileName();
@@ -35,7 +39,11 @@ console.log("[INFO] Now receiving Tweets...");
 /* -- Handler when a tweet is received -- */
 stream.on('tweet', function (tweet) {
     CheckFileSize();
+    if(newFile && lFileName !== '') {
+        azureUploadBlob();
+    }
     SaveTweet(tweet);
+    console.log('.');
 });
 
 /* -- Handler if the process is finished with Ctrl+C -- */
@@ -73,8 +81,25 @@ function CheckFileSize() {
 
 /* -- Assigns a new file name from the current date-time -- */
 function assignNewFileName(){
+    lFileName = oFileName;
     oFileName = Date.now().toString() + '.json';
     oFullPath = oFolder + oFileName;
-    fs.appendFileSync(oFullPath, '');
+    fs.appendFileSync(oFullPath, '', function(err) {
+        if(err) {
+            console.log('[ERR] Error when writing the file ' + oFileName);
+        }
+    });
     console.log('[INFO] New file: ' + oFileName);
+}
+
+function azureUploadBlob() {
+    console.log('[INFO] Uploading ' + lFileName + ' to Azure');
+    var azureBlob = azure.createBlobService();
+    azureBlob.createBlockBlobFromLocalFile(config.azure.container, config.azure.folder + lFileName, oFolder + lFileName, function(err) {
+        if(err) {
+            console.log('[ERROR] Azure Blob Upload Failed for ' + lFileName + '\n\tErrDetails: ' + err.message);
+        } else {
+            console.log('[INFO] File ' + lFileName + ' uploaded correctly to Azure Storage');
+        }
+    });
 }
