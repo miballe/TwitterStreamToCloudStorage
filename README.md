@@ -68,5 +68,7 @@ I'm aware that the app still don't have the expected support to write to all typ
 2. Logger
 3. Tweets pre-processing
 4. Compress the ended file and move it to an archive folder
+5. Fix uploading file to an Azure blob subfolder
+6. Fix upload the partial file when Ctrl+C
 
 
